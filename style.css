@@ -1,0 +1,16 @@
+body {
+    background: #202020;
+    color: #DDD;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+form
+{
+    margin: 10px;
+
+}
+
+input
+{
+    margin: 10px;;
+}

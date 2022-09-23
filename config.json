@@ -1,0 +1,8 @@
+{
+	"SERVER_PORT": 10229,
+	"IMAGES_DIR": "images",
+	"IMAGES_FORM": "images",
+	"MAX_FILE_SIZE": 3145728,
+	"MAX_FILES_UPLOAD": 5,
+	"MAX_THREADS": 2
+}
