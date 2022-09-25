@@ -19,8 +19,8 @@ func main() {
 	//Esto no es necesario, Init() es llamado desde las funciones del paquete config en caso de que no este inicializado (config cargada)
 	//config.Load()
 
-	if runtime.NumCPU() >= config.GetThreads() {
-		hilos := config.GetThreads()
+	if runtime.NumCPU() >= config.GetConfig().MAX_THREADS {
+		hilos := config.GetConfig().MAX_THREADS
 
 		fmt.Println("Cantidad de procesadores:", runtime.NumCPU())
 		fmt.Printf("Habilitando %d hilos para el proceso\n", hilos)
@@ -41,7 +41,7 @@ func main() {
 		fmt.Println("Server Goroutine start")
 
 		routes.Setup()
-		err := http.ListenAndServe(fmt.Sprintf(":%d", config.GetPort()), nil)
+		err := http.ListenAndServe(fmt.Sprintf(":%d", config.GetConfig().SERVER_PORT), nil)
 
 		if err != nil {
 			log.Fatal(err.Error())

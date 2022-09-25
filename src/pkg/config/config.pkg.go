@@ -8,25 +8,20 @@ import (
 	"os"
 )
 
-// jsonCfg struct which contains a configurations
-type jsonCfg struct {
+// ConfigStruct struct which contains a configurations
+type ConfigStruct struct {
 	SERVER_PORT      int    `json:"SERVER_PORT"`
 	IMAGES_DIR       string `json:"IMAGES_DIR"`
 	MAX_FILE_SIZE    int64  `json:"MAX_FILE_SIZE"`
-	MAX_FILES_UPLOAD int64  `json:"MAX_FILES_UPLOAD"`
+	MAX_FILES_UPLOAD int    `json:"MAX_FILES_UPLOAD"`
 	MAX_THREADS      int    `json:"MAX_THREADS"`
 	IMAGES_FORM      string `json:"IMAGES_FORM"`
 }
 
-var serverConfig jsonCfg
+var serverConfig ConfigStruct
 var initialized bool
 
-func typeof(v interface{}) string {
-	return fmt.Sprintf("%T", v)
-}
-
 func Load() {
-
 	fmt.Println("Loading config.json...")
 	// Open our jsonFile
 	jsonFile, err := os.Open("config.json")
@@ -57,51 +52,16 @@ func Load() {
 	initialized = true
 }
 
-func GetThreads() int {
+func GetConfig() ConfigStruct {
 	if initialized == false {
 		Load()
 	}
-	return serverConfig.MAX_THREADS
-}
-
-func GetPort() int {
-	if initialized == false {
-		Load()
-	}
-	return serverConfig.SERVER_PORT
-}
-
-func GetImagesDir() string {
-	if initialized == false {
-		Load()
-	}
-	return serverConfig.IMAGES_DIR
-}
-
-func GetImagesForm() string {
-	if initialized == false {
-		Load()
-	}
-	return serverConfig.IMAGES_FORM
-}
-
-func GetMaxFileSize() int64 {
-	if initialized == false {
-		Load()
-	}
-	return serverConfig.MAX_FILE_SIZE
-}
-
-func GetMaxFilesUpload() int64 {
-	if initialized == false {
-		Load()
-	}
-	return serverConfig.MAX_FILES_UPLOAD
+	return serverConfig
 }
 
 func GetMaxUploadSize() int64 {
 	if initialized == false {
 		Load()
 	}
-	return GetMaxFilesUpload() * GetMaxFileSize()
+	return int64(serverConfig.MAX_FILES_UPLOAD) * serverConfig.MAX_FILE_SIZE
 }

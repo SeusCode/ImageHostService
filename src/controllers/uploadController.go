@@ -14,10 +14,10 @@ import (
 )
 
 func Upload(w http.ResponseWriter, r *http.Request) {
-	r.ParseMultipartForm(config.GetMaxUploadSize())       // Parse max 5 files
-	files := r.MultipartForm.File[config.GetImagesForm()] // Get files
+	r.ParseMultipartForm(config.GetMaxUploadSize())               // Parse max 5 files
+	files := r.MultipartForm.File[config.GetConfig().IMAGES_FORM] // Get files
 
-	os.Mkdir(config.GetImagesDir(), 0777)
+	os.Mkdir(config.GetConfig().IMAGES_DIR, 0777)
 
 	// No cache headers set
 	var epoch = time.Unix(0, 0).Format(time.RFC1123)
@@ -33,8 +33,12 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(k, v)
 	}
 
+	if len(files) > config.GetConfig().MAX_FILES_UPLOAD {
+		fmt.Fprintf(w, "Demasiados archivos")
+		return
+	}
+
 	// Iterate files
-	//TODO: Limit to a config.GetMaxFilesUpload()
 	for _, file := range files {
 		fileData, err := file.Open()
 
@@ -58,7 +62,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if file.Size > (int64(config.GetMaxFileSize())) {
+		if file.Size > (int64(config.GetConfig().MAX_FILE_SIZE)) {
 			fmt.Fprintf(w, "Archivo demasiado pesado!")
 			return
 		}
