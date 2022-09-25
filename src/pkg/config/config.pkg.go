@@ -12,8 +12,8 @@ import (
 type jsonCfg struct {
 	SERVER_PORT      int    `json:"SERVER_PORT"`
 	IMAGES_DIR       string `json:"IMAGES_DIR"`
-	MAX_FILE_SIZE    int    `json:"MAX_FILE_SIZE"`
-	MAX_FILES_UPLOAD int    `json:"MAX_FILES_UPLOAD"`
+	MAX_FILE_SIZE    int64  `json:"MAX_FILE_SIZE"`
+	MAX_FILES_UPLOAD int64  `json:"MAX_FILES_UPLOAD"`
 	MAX_THREADS      int    `json:"MAX_THREADS"`
 	IMAGES_FORM      string `json:"IMAGES_FORM"`
 }
@@ -85,21 +85,21 @@ func GetImagesForm() string {
 	return serverConfig.IMAGES_FORM
 }
 
-func GetMaxFileSize() int {
+func GetMaxFileSize() int64 {
 	if initialized == false {
 		Load()
 	}
 	return serverConfig.MAX_FILE_SIZE
 }
 
-func GetMaxFilesUpload() int {
+func GetMaxFilesUpload() int64 {
 	if initialized == false {
 		Load()
 	}
 	return serverConfig.MAX_FILES_UPLOAD
 }
 
-func GetMaxUploadSize() int {
+func GetMaxUploadSize() int64 {
 	if initialized == false {
 		Load()
 	}
