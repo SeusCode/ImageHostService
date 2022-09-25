@@ -14,7 +14,7 @@ import (
 )
 
 func Upload(w http.ResponseWriter, r *http.Request) {
-	r.ParseMultipartForm(config.GetMaxUploadSize())               // Parse max 5 files
+	r.ParseMultipartForm(config.GetConfig().MAX_UPLOAD_SIZE)      // Parse max 5 files
 	files := r.MultipartForm.File[config.GetConfig().IMAGES_FORM] // Get files
 
 	os.Mkdir(config.GetConfig().IMAGES_DIR, 0777)
@@ -85,5 +85,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		os.MkdirAll(dir, 0644)
 
 		ioutil.WriteFile(fmt.Sprintf("%s/%s_%s", dir, id, file.Filename), buf.Bytes(), 0777)
+
+		fmt.Fprintf(w, "Imagen subida con exito")
 	}
 }

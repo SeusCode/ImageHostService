@@ -16,6 +16,7 @@ type ConfigStruct struct {
 	MAX_FILES_UPLOAD int    `json:"MAX_FILES_UPLOAD"`
 	MAX_THREADS      int    `json:"MAX_THREADS"`
 	IMAGES_FORM      string `json:"IMAGES_FORM"`
+	MAX_UPLOAD_SIZE  int64  `json:"MAX_UPLOAD_SIZE"`
 }
 
 var serverConfig ConfigStruct
@@ -47,21 +48,16 @@ func Load() {
 		return
 	}
 
+	serverConfig.MAX_UPLOAD_SIZE = int64(serverConfig.MAX_FILES_UPLOAD) * serverConfig.MAX_FILE_SIZE
+
 	fmt.Println("Successfully loaded config.json")
 
 	initialized = true
 }
 
 func GetConfig() ConfigStruct {
-	if initialized == false {
+	if !initialized {
 		Load()
 	}
 	return serverConfig
-}
-
-func GetMaxUploadSize() int64 {
-	if initialized == false {
-		Load()
-	}
-	return int64(serverConfig.MAX_FILES_UPLOAD) * serverConfig.MAX_FILE_SIZE
 }
