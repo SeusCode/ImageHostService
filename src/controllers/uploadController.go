@@ -86,6 +86,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 
 		ioutil.WriteFile(fmt.Sprintf("%s/%s_%s", dir, id, file.Filename), buf.Bytes(), 0777)
 
-		fmt.Fprintf(w, "Imagen subida con exito")
+		msg := fmt.Sprintf("Imagen subida con exito.\n\nhttp://localhost:%d/%s/%s_%s", config.GetConfig().SERVER_PORT, dir, id, file.Filename)
+		fmt.Fprintf(w, msg)
 	}
 }
