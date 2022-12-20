@@ -1,6 +1,6 @@
 /*
 
- * Original Idea: Sergio Baudcracco. First code: Genaro Civilotti
+ * Original Idea: Sergio Baudracco. First code: Genaro Civilotti
  * @author SEUSCODE
  * @date 19/SEPT/2022
  * @version 1.0
