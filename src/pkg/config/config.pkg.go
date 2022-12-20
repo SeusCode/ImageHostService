@@ -11,12 +11,19 @@ import (
 // ConfigStruct struct which contains a configurations
 type ConfigStruct struct {
 	SERVER_PORT      int    `json:"SERVER_PORT"`
+	SERVER_SSL       bool   `json:"SERVER_SSL"`
 	IMAGES_DIR       string `json:"IMAGES_DIR"`
 	MAX_FILE_SIZE    int64  `json:"MAX_FILE_SIZE"`
 	MAX_FILES_UPLOAD int    `json:"MAX_FILES_UPLOAD"`
 	MAX_THREADS      int    `json:"MAX_THREADS"`
 	IMAGES_FORM      string `json:"IMAGES_FORM"`
 	MAX_UPLOAD_SIZE  int64  `json:"MAX_UPLOAD_SIZE"`
+	DBNAME           string `json:"DBNAME"`
+	DBHOST           string `json:"DBHOST"`
+	DBPASS           string `json:"DBPASS"`
+	DBPORT           string `json:"DBPORT"`
+	DBUSER           string `json:"DBUSER"`
+	DBCHAR           string `json:"DBCHAR"`
 }
 
 var serverConfig ConfigStruct
@@ -43,7 +50,8 @@ func Load() {
 	// jsonFile's content into 'serverConfig' which we defined above
 	json.Unmarshal(byteValue, &serverConfig)
 
-	if serverConfig.SERVER_PORT == 0 || serverConfig.MAX_FILE_SIZE == 0 || serverConfig.MAX_FILES_UPLOAD == 0 || serverConfig.IMAGES_DIR == "" {
+	if serverConfig.SERVER_PORT == 0 || serverConfig.MAX_FILE_SIZE == 0 || serverConfig.MAX_FILES_UPLOAD == 0 || serverConfig.IMAGES_DIR == "" ||
+		serverConfig.DBNAME == "" || serverConfig.DBHOST == "" || serverConfig.DBPASS == "" || serverConfig.DBPORT == "" || serverConfig.DBUSER == "" || serverConfig.DBCHAR == "" {
 		log.Fatal("Invalid config file")
 		return
 	}

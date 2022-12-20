@@ -1,8 +1,15 @@
 {
 	"SERVER_PORT": 10229,
+	"SERVER_SSL": true,
 	"IMAGES_DIR": "images",
 	"IMAGES_FORM": "images",
 	"MAX_FILE_SIZE": 3145728,
 	"MAX_FILES_UPLOAD": 5,
-	"MAX_THREADS": 2
+	"MAX_THREADS": 10,
+	"DBNAME": "imagehost",
+	"DBHOST": "localhost",
+	"DBPASS": "123456",
+	"DBPORT": "3306",
+	"DBUSER": "imagehost",
+	"DBCHAR": "utf8"
 }

@@ -1,3 +1,9 @@
 ./images/*
 images/*
 images
+main.exe
+___ERROR.jpg
+___ERROR.psd
+ssl.key
+ssl.ca
+ssl.cert

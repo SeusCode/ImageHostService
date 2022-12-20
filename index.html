@@ -8,7 +8,7 @@
 		<div>Webpage for tests</div>
 		<hr />
 		<form
-			action="http://localhost:10229/upload"
+			action="http://localhost:10229/api/images/v1/upload"
 			method="post"
 			enctype="multipart/form-data"
 		>
@@ -17,13 +17,13 @@
 			<input type="submit" value="Upload Image" name="submit" />
 		</form>
 		<hr />
-		<form action="http://localhost:10229/download" method="post">
+		<form action="http://localhost:10229/api/images/v1/download" method="post">
 			Select image to download:<br />
 			Name: <input type="text" name="image" id="image" /><br />
 			<input type="submit" value="Download Image" name="submit" />
 		</form>
 		<hr />
-		<form action="http://localhost:10229/get/token" method="post">
+		<form action="http://localhost:10229/api/images/v1/token" method="post">
 			Obtain a token<br />
 			<input type="submit" value="Get Token" name="submit" />
 		</form>

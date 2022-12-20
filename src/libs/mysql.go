@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"restapi/src/models"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -28,7 +29,7 @@ func (c *DbConfig) InitMysqlDB() *gorm.DB {
 		os.Exit(-1)
 	}
 
-	//db.AutoMigrate(&models.App{}, &models.UserLicense{})
+	db.AutoMigrate(&models.User{}, &models.Image{}, &models.SystemLog{})
 
 	return db
 }
